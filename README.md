@@ -1,12 +1,13 @@
-# shortcasts-dev
-Entwicklungsstrang für die Shortcastproduktion IPWA02-01
+# Req4test
 
-# Branches und ihre Verwendung:
-## main
-Ergebnisse aus den Videos rund um das Hello World-Beispiel
-## components
-Ergebnis aus dem Video "JSF-Komponenten"
-## beans-intro
-Ergebnis aus dem Video "Beans: Eine Einführung"
-## beans-input
-Ergebnis aus dem Video "Beans: Benutzereingaben speichern"
+## Getting started
+
+This project is based on the code example created by IU (see https://github.com/IUBH-Webanwendungen/shortcasts-dev)
+
+This project uses Maven Cargo plugin to quickly start server (see https://codehaus-cargo.github.io/
+
+You can build an run server using the following command
+```
+mvn clean package cargo:run
+```
+Then the application can be opened in browser by typing `http://localhost:8080/req4test/` in the address bar and pressing ENTER.
