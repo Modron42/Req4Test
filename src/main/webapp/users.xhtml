@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="jakarta.faces.core" xmlns:jsf="jakarta.faces"
+    xmlns:h="jakarta.faces.html">
+<f:view>
+    <h:head>
+        <title>Require4Testing</title>
+    </h:head>
+    <h:body>
+        <h1>Users</h1>
+        <h:link value="Dashboard" outcome="index.xhtml" />
+        <h:dataTable value="#{repository.employees}" var="u" styleClass="data-table" headerClass="data-header"
+            rowClasses="data-odd,data-even">
+            <h:column>
+                <f:facet name="header">Username</f:facet>
+                #{u.username}
+            </h:column>
+            <h:column>
+                <f:facet name="header">First Name</f:facet>
+                #{u.firstName}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Last Name</f:facet>
+                #{u.lastName}
+            </h:column>
+        </h:dataTable>
+    </h:body>
+</f:view>
+
+</html>

@@ -6,67 +6,15 @@
         <title>Require4Testing</title>
     </h:head>
     <h:body>
-        <h1>Users</h1>
-        <h:dataTable value="#{repository.employees}" var="u" styleClass="data-table" headerClass="data-header"
-            rowClasses="data-odd,data-even">
-            <h:column>
-                <f:facet name="header">Username</f:facet>
-                #{u.username}
-            </h:column>
-            <h:column>
-                <f:facet name="header">First Name</f:facet>
-                #{u.firstName}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Last Name</f:facet>
-                #{u.lastName}
-            </h:column>
-        </h:dataTable>
-
-        <h1>Requirements</h1>
-        <h:dataTable value="#{repository.requirements}" var="r" styleClass="data-table" headerClass="data-header"
-            rowClasses="data-odd,data-even">
-            <h:column>
-                <f:facet name="header">Code</f:facet>
-                <h:link value="#{r.code}" outcome="req.xhtml">
-                    <f:param name="id" value="#{r.id}" />
-                </h:link>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Title</f:facet>
-                #{r.title}
-            </h:column>
-        </h:dataTable>
-
-        <h1>Test Cases</h1>
-        <h:dataTable value="#{repository.testCases}" var="t" styleClass="data-table" headerClass="data-header"
-            rowClasses="data-odd,data-even">
-            <h:column>
-                <f:facet name="header">Code</f:facet>
-                <h:link value="#{t.code}" outcome="test.xhtml">
-                    <f:param name="id" value="#{t.id}" />
-                </h:link>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Title</f:facet>
-                #{t.title}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Status</f:facet>
-                #{t.status}
-            </h:column>
-        </h:dataTable>
-
-        <h1>Test Runs</h1>
-        <h:dataTable value="#{repository.testRuns}" var="r" styleClass="data-table" headerClass="data-header"
-            rowClasses="data-odd,data-even">
-            <h:column>
-                <f:facet name="header">Code</f:facet>
-                <h:link value="#{r.code}" outcome="run.xhtml">
-                    <f:param name="id" value="#{r.id}" />
-                </h:link>
-            </h:column>
-        </h:dataTable>
+        <h1>Welcome to Require4Testing</h1>
+        <h:link value="Users" outcome="users.xhtml" />
+        <br />
+        <h:link value="Requirements" outcome="reqs.xhtml" />
+        <br />
+        <h:link value="Test Cases" outcome="tests.xhtml" />
+        <br />
+        <h:link value="Test Runs" outcome="runs.xhtml" />
+        <br />
     </h:body>
 </f:view>
 
