@@ -33,12 +33,30 @@ public class Repository {
         return employees;
     }
 
+    public void addEmployee(String firstName, String lastName, String username, String password) {
+        EntityManager entityManager = database.createEntityManager();
+        Employee employee = new Employee(firstName, lastName, username, password);
+        entityManager.getTransaction().begin();
+        entityManager.persist(employee);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+    }
+
     public List<Requirement> getRequirements() {
         EntityManager entityManager = database.createEntityManager();
         List<Requirement> reqs = entityManager.createQuery("SELECT e FROM Requirement e", Requirement.class)
                 .getResultList();
         entityManager.close();
         return reqs;
+    }
+
+    public void addRequirement(String title) {
+        EntityManager entityManager = database.createEntityManager();
+        Requirement requirement = new Requirement(title, "");
+        entityManager.getTransaction().begin();
+        entityManager.persist(requirement);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     public List<TestCase> getTestCases() {
@@ -49,11 +67,29 @@ public class Repository {
         return tests;
     }
 
+    public void addTestCase(String title) {
+        EntityManager entityManager = database.createEntityManager();
+        TestCase test = new TestCase(title);
+        entityManager.getTransaction().begin();
+        entityManager.persist(test);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+    }
+
     public List<TestRun> getTestRuns() {
         EntityManager entityManager = database.createEntityManager();
         List<TestRun> runs = entityManager.createQuery("SELECT e FROM TestRun e", TestRun.class)
                 .getResultList();
         entityManager.close();
         return runs;
+    }
+
+    public void addTestRun() {
+        EntityManager entityManager = database.createEntityManager();
+        TestRun run = new TestRun();
+        entityManager.getTransaction().begin();
+        entityManager.persist(run);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 }

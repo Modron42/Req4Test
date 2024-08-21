@@ -8,6 +8,38 @@
     <h:body>
         <h1>Users</h1>
         <h:link value="Dashboard" outcome="index.xhtml" />
+        <div>
+            <h:form prependId="false">
+                <p>
+                    <h:outputLabel for="username">Username:</h:outputLabel>
+                    <h:inputText id="username" value="#{employeeController.username}" required="true"
+                        requiredMessage="Username is required." />
+                    <h:message for="username" />
+                </p>
+                <p>
+                    <h:outputLabel for="password">Password:</h:outputLabel>
+                    <h:inputSecret id="password" value="#{employeeController.password}" required="true"
+                        requiredMessage="Password is required." />
+                    <h:message for="password" />
+                </p>
+                <p>
+                    <h:outputLabel for="firstname">First name:</h:outputLabel>
+                    <h:inputText id="firstname" value="#{employeeController.firstName}" required="true"
+                        requiredMessage="First name is required." />
+                    <h:message for="firstname" />
+                </p>
+                <p>
+                    <h:outputLabel for="lastname">Last name:</h:outputLabel>
+                    <h:inputText id="lastname" value="#{employeeController.lastName}" required="true"
+                        requiredMessage="Last name is required." />
+                    <h:message for="lastname" />
+                </p>
+                <p>
+                    <h:commandButton id="submit" value="New User" action="#{employeeController.create()}" />
+                </p>
+            </h:form>
+        </div>
+        <br />
         <h:dataTable value="#{repository.employees}" var="u" styleClass="data-table" headerClass="data-header"
             rowClasses="data-odd,data-even">
             <h:column>

@@ -8,6 +8,14 @@
     <h:body>
         <h1>Test Runs</h1>
         <h:link value="Dashboard" outcome="index.xhtml" />
+        <div>
+            <h:form prependId="false">
+                <p>
+                    <h:commandButton id="submit" value="New Test Run" action="#{testRunController.create()}" />
+                </p>
+            </h:form>
+        </div>
+        <br />
         <h:dataTable value="#{repository.testRuns}" var="r" styleClass="data-table" headerClass="data-header"
             rowClasses="data-odd,data-even">
             <h:column>
