@@ -27,7 +27,7 @@ public class Repository {
 
     public List<Employee> getEmployees() {
         EntityManager entityManager = database.createEntityManager();
-        List<Employee> employees = entityManager.createQuery("SELECT e FROM Employee e", Employee.class)
+        List<Employee> employees = entityManager.createQuery("SELECT e FROM Employee e ORDER by id", Employee.class)
                 .getResultList();
         entityManager.close();
         return employees;
@@ -44,10 +44,17 @@ public class Repository {
 
     public List<Requirement> getRequirements() {
         EntityManager entityManager = database.createEntityManager();
-        List<Requirement> reqs = entityManager.createQuery("SELECT e FROM Requirement e", Requirement.class)
+        List<Requirement> reqs = entityManager.createQuery("SELECT e FROM Requirement e ORDER by id", Requirement.class)
                 .getResultList();
         entityManager.close();
         return reqs;
+    }
+
+    public Requirement getRequirement(int id) {
+        EntityManager entityManager = database.createEntityManager();
+        Requirement req = entityManager.find(Requirement.class, id);
+        entityManager.close();
+        return req;
     }
 
     public void addRequirement(String title) {
@@ -59,9 +66,20 @@ public class Repository {
         entityManager.close();
     }
 
+    public void updateRequirement(Requirement requirement) {
+        EntityManager entityManager = database.createEntityManager();
+        entityManager.getTransaction().begin();
+        for (TestCase tc : requirement.getTestCases()) {
+            entityManager.merge(tc);
+        }
+        entityManager.merge(requirement);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+    }
+
     public List<TestCase> getTestCases() {
         EntityManager entityManager = database.createEntityManager();
-        List<TestCase> tests = entityManager.createQuery("SELECT e FROM TestCase e", TestCase.class)
+        List<TestCase> tests = entityManager.createQuery("SELECT e FROM TestCase e ORDER by id", TestCase.class)
                 .getResultList();
         entityManager.close();
         return tests;
@@ -78,7 +96,7 @@ public class Repository {
 
     public List<TestRun> getTestRuns() {
         EntityManager entityManager = database.createEntityManager();
-        List<TestRun> runs = entityManager.createQuery("SELECT e FROM TestRun e", TestRun.class)
+        List<TestRun> runs = entityManager.createQuery("SELECT e FROM TestRun e ORDER by id", TestRun.class)
                 .getResultList();
         entityManager.close();
         return runs;

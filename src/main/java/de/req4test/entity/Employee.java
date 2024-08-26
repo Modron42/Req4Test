@@ -1,9 +1,14 @@
 package de.req4test.entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Employee {
@@ -17,6 +22,8 @@ public class Employee {
     private String username;
     private String password;
 
+    @OneToMany(fetch = FetchType.EAGER)
+    private Set<TestRun> runs = new HashSet<>();
 
     public Employee() {
 
@@ -67,5 +74,25 @@ public class Employee {
 
     public void setPassword(String value) {
         password = value;
+    }
+
+    public Set<TestRun> getRuns() {
+        return runs;
+    }
+
+    public void addRun(TestRun value) {
+        runs.add(value);
+    }
+
+    public void removeRun(TestRun value) {
+        runs.remove(value);
+    }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
+    public String toString() {
+        return getFullName();
     }
 }

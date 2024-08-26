@@ -44,7 +44,16 @@ public class Database {
         TestCase tst2 = new TestCase("Performance tests", "NOTRUN");
         TestCase tst3 = new TestCase("Acceptance tests", "NOTRUN");
 
+        tst1.addStep("Logn to application.");
+        tst1.addStep("Create a requirement.");
+        tst1.addStep("View requirement details.");
+        tst1.addStep("Update requirement title and text.");
+
         TestRun run1 = new TestRun();
+        run1.setAssignee(usr3);
+        run1.addTestCase(tst1);
+
+        req1.addTestCase(tst1);
 
         EntityManager entityManager = createEntityManager();
         entityManager.getTransaction().begin();

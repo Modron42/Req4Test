@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="jakarta.faces.core" xmlns:jsf="jakarta.faces"
+    xmlns:h="jakarta.faces.html">
+<f:view>
+    <h:head>
+        <title>Require4Testing</title>
+    </h:head>
+    <f:metadata>
+        <f:viewParam name="id" value="#{requirementController.id}" />
+    </f:metadata>
+    <h:body>
+        <h1>View Requirement: #{requirementController.code}</h1>
+        <h:link value="Dashboard" outcome="index.xhtml" />
+        <br />
+        <h:link value="Requirements" outcome="reqs.xhtml" />
+        <br />
+        <div>
+            <h:form prependId="false">
+                <p>
+                    <h:outputLabel for="title">Title:</h:outputLabel>
+                    <h:inputText id="title" value="#{requirementController.title}" required="true"
+                        requiredMessage="Title is required." />
+                    <h:message for="title" />
+                </p>
+                <p>
+                    <h:outputLabel for="content">Text:</h:outputLabel>
+                    <h:inputTextarea id="content" value="#{requirementController.text}" />
+                </p>
+                <p>
+                    <h:commandButton id="submit" value="Update Requirement"
+                        action="#{requirementController.update()}" />
+                </p>
+            </h:form>
+        </div>
+        <div>
+            <h2>Linked Test Cases</h2>
+            <h:dataTable value="#{requirementController.testCases}" var="t" styleClass="data-table"
+                headerClass="data-header" rowClasses="data-odd,data-even">
+                <h:column>
+                    <f:facet name="header">Code</f:facet>
+                    <h:link value="#{t.code}" outcome="test.xhtml">
+                        <f:param name="id" value="#{t.id}" />
+                    </h:link>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Title</f:facet>
+                    #{t.title}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Status</f:facet>
+                    #{t.status}
+                </h:column>
+            </h:dataTable>
+        </div>
+    </h:body>
+</f:view>
+
+</html>
