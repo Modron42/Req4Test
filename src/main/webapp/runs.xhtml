@@ -20,7 +20,17 @@
             rowClasses="data-odd,data-even">
             <h:column>
                 <f:facet name="header">Code</f:facet>
-                #{r.code}
+                <h:link value="#{r.code}" outcome="run.xhtml">
+                    <f:param name="id" value="#{r.id}" />
+                </h:link>
+            </h:column>
+            <h:column>
+                <f:facet name="header">Assignee</f:facet>
+                #{r.assignee}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Coverage</f:facet>
+                #{r.coverage}
             </h:column>
         </h:dataTable>
     </h:body>

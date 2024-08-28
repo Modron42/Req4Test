@@ -42,6 +42,13 @@ public class Repository {
         entityManager.close();
     }
 
+    public Employee getEmployee(int id) {
+        EntityManager entityManager = database.createEntityManager();
+        Employee emp = entityManager.find(Employee.class, id);
+        entityManager.close();
+        return emp;
+    }
+
     public List<Requirement> getRequirements() {
         EntityManager entityManager = database.createEntityManager();
         List<Requirement> reqs = entityManager.createQuery("SELECT e FROM Requirement e ORDER by id", Requirement.class)
@@ -85,11 +92,29 @@ public class Repository {
         return tests;
     }
 
+    public TestCase getTestCase(int id) {
+        EntityManager entityManager = database.createEntityManager();
+        TestCase tst = entityManager.find(TestCase.class, id);
+        entityManager.close();
+        return tst;
+    }
+
     public void addTestCase(String title) {
         EntityManager entityManager = database.createEntityManager();
         TestCase test = new TestCase(title);
         entityManager.getTransaction().begin();
         entityManager.persist(test);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+    }
+
+    public void updateTestCase(TestCase test) {
+        EntityManager entityManager = database.createEntityManager();
+        entityManager.getTransaction().begin();
+        for (Requirement rq : test.getRequirements()) {
+            entityManager.merge(rq);
+        }
+        entityManager.merge(test);
         entityManager.getTransaction().commit();
         entityManager.close();
     }
@@ -102,11 +127,32 @@ public class Repository {
         return runs;
     }
 
+    public TestRun getTestRun(int id) {
+        EntityManager entityManager = database.createEntityManager();
+        TestRun run = entityManager.find(TestRun.class, id);
+        entityManager.close();
+        return run;
+    }
+
     public void addTestRun() {
         EntityManager entityManager = database.createEntityManager();
         TestRun run = new TestRun();
         entityManager.getTransaction().begin();
         entityManager.persist(run);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+    }
+
+    public void updateTestRun(TestRun run) {
+        EntityManager entityManager = database.createEntityManager();
+        entityManager.getTransaction().begin();
+        if (run.getAssignee() != null) {
+            entityManager.merge(run.getAssignee());
+        }
+        for (TestCase tc : run.getTestCases()) {
+            entityManager.merge(tc);
+        }
+        entityManager.merge(run);
         entityManager.getTransaction().commit();
         entityManager.close();
     }

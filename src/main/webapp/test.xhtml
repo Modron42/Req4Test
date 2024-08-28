@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="jakarta.faces.core" xmlns:jsf="jakarta.faces"
+    xmlns:h="jakarta.faces.html">
+<f:view>
+    <h:head>
+        <title>Require4Testing</title>
+    </h:head>
+    <f:metadata>
+        <f:viewParam name="id" value="#{testCaseController.id}" />
+    </f:metadata>
+    <h:body>
+        <h1>View Test Case: #{testCaseController.code}</h1>
+        <h:link value="Dashboard" outcome="index.xhtml" />
+        <br />
+        <h:link value="Test Cases" outcome="tests.xhtml" />
+        <br />
+        <div>
+            <h:form prependId="false">
+                <p>
+                    <h:outputLabel for="title">Title:</h:outputLabel>
+                    <h:inputText id="title" value="#{testCaseController.title}" required="true"
+                        requiredMessage="Title is required." />
+                    <h:message for="title" />
+                </p>
+                <p>
+                    <h:outputLabel for="status">Status:</h:outputLabel>
+                    <h:selectOneRadio id="status" value="#{testCaseController.status}">
+                        <f:selectItem itemValue="NOTRUN" itemLabel="not run" />
+                        <f:selectItem itemValue="SUCCEEDED" itemLabel="succeeded" />
+                        <f:selectItem itemValue="FAILED" itemLabel="failed" />
+                    </h:selectOneRadio>
+                </p>
+                <h2>Steps</h2>
+                <h:dataTable value="#{testCaseController.steps}" var="r" styleClass="step-table"
+                    headerClass="step-header" rowClasses="step-odd,step-even">
+                    <h:column>
+                        <f:facet name="header">Step</f:facet>
+                        #{testCaseController.steps.rowIndex + 1}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Description</f:facet>
+                        <h:inputText value="#{r}" />
+                    </h:column>
+                    <h:column>
+                        <h:commandLink value="Remove Step"
+                            action="#{testCaseController.removeStep(testCaseController.steps.rowIndex)}" />
+                    </h:column>
+                </h:dataTable>
+                <br />
+                <h:outputLabel for="newstep">New Step:</h:outputLabel>
+                <h:inputText id="newstep" value="#{testCaseController.newStep}" />
+                <h:commandButton id="append" value="Add New Step" action="#{testCaseController.addStep()}" />
+                <br />
+                <h:commandButton id="submit" value="Update Test Case" action="#{testCaseController.update()}" />
+            </h:form>
+        </div>
+        <div>
+            <h2>Linked Requirements</h2>
+            <h:dataTable value="#{testCaseController.requirements}" var="r" styleClass="data-table"
+                headerClass="data-header" rowClasses="data-odd,data-even">
+                <h:column>
+                    <f:facet name="header">Code</f:facet>
+                    <h:link value="#{r.code}" outcome="req.xhtml">
+                        <f:param name="id" value="#{r.id}" />
+                    </h:link>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Title</f:facet>
+                    #{r.title}
+                </h:column>
+            </h:dataTable>
+        </div>
+        <div>
+            <h2>Containing Test Runs</h2>
+            <h:dataTable value="#{testCaseController.testRuns}" var="r" styleClass="data-table"
+                headerClass="data-header" rowClasses="data-odd,data-even">
+                <h:column>
+                    <f:facet name="header">Code</f:facet>
+                    <h:link value="#{r.code}" outcome="req.xhtml">
+                        <f:param name="id" value="#{r.id}" />
+                    </h:link>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Assignee</f:facet>
+                    #{r.assignee}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Coverage</f:facet>
+                    #{r.coverage}
+                </h:column>
+            </h:dataTable>
+        </div>
+    </h:body>
+</f:view>
+
+</html>
