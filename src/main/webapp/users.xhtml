@@ -44,7 +44,9 @@
             rowClasses="data-odd,data-even">
             <h:column>
                 <f:facet name="header">Username</f:facet>
-                #{u.username}
+                <h:link value="#{u.username}" outcome="user.xhtml">
+                    <f:param name="id" value="#{u.id}" />
+                </h:link>
             </h:column>
             <h:column>
                 <f:facet name="header">First Name</f:facet>

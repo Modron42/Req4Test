@@ -33,6 +33,13 @@ public class Repository {
         return employees;
     }
 
+    public Employee getEmployee(int id) {
+        EntityManager entityManager = database.createEntityManager();
+        Employee emp = entityManager.find(Employee.class, id);
+        entityManager.close();
+        return emp;
+    }
+
     public void addEmployee(String firstName, String lastName, String username, String password) {
         EntityManager entityManager = database.createEntityManager();
         Employee employee = new Employee(firstName, lastName, username, password);
@@ -42,11 +49,12 @@ public class Repository {
         entityManager.close();
     }
 
-    public Employee getEmployee(int id) {
+    public void updateEmployee(Employee employee) {
         EntityManager entityManager = database.createEntityManager();
-        Employee emp = entityManager.find(Employee.class, id);
+        entityManager.getTransaction().begin();
+        entityManager.merge(employee);
+        entityManager.getTransaction().commit();
         entityManager.close();
-        return emp;
     }
 
     public List<Requirement> getRequirements() {

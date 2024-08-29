@@ -3,6 +3,7 @@ package de.req4test.controller;
 import java.io.Serializable;
 
 import de.req4test.Repository;
+import de.req4test.entity.Employee;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -13,6 +14,7 @@ public class EmployeeController implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private int id;
     private String firstName;
     private String lastName;
     private String username;
@@ -24,6 +26,18 @@ public class EmployeeController implements Serializable {
         repository = repo;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int value) {
+        id = value;
+        Employee emp = repository.getEmployee(value);
+        firstName = emp.getFirstName();
+        lastName = emp.getLastName();
+        username = emp.getUsername();
+        password = emp.getPassword();
+    }
 
     public String getFirstName() {
         return firstName;
@@ -63,5 +77,20 @@ public class EmployeeController implements Serializable {
         lastName = null;
         username = null;
         password = null;
+    }
+
+    public void update() {
+        Employee emp = repository.getEmployee(id);
+        emp.setFirstName(firstName);
+        emp.setLastName(lastName);
+        repository.updateEmployee(emp);
+        setId(id);
+    }
+
+    public void updatePassword() {
+        Employee emp = repository.getEmployee(id);
+        emp.setPassword(password);
+        repository.updateEmployee(emp);
+        setId(id);
     }
 }
