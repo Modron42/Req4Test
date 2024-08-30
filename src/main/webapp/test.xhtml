@@ -55,40 +55,66 @@
             </h:form>
         </div>
         <div>
-            <h2>Linked Requirements</h2>
-            <h:dataTable value="#{testCaseController.requirements}" var="r" styleClass="data-table"
-                headerClass="data-header" rowClasses="data-odd,data-even">
-                <h:column>
-                    <f:facet name="header">Code</f:facet>
-                    <h:link value="#{r.code}" outcome="req.xhtml">
-                        <f:param name="id" value="#{r.id}" />
-                    </h:link>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Title</f:facet>
-                    #{r.title}
-                </h:column>
-            </h:dataTable>
+            <h:form prependId="false">
+                <h2>Linked Requirements</h2>
+                <h:dataTable value="#{testCaseController.requirements}" var="r" styleClass="data-table"
+                    headerClass="data-header" rowClasses="data-odd,data-even">
+                    <h:column>
+                        <f:facet name="header">Code</f:facet>
+                        <h:link value="#{r.code}" outcome="req.xhtml">
+                            <f:param name="id" value="#{r.id}" />
+                        </h:link>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Title</f:facet>
+                        #{r.title}
+                    </h:column>
+                    <h:column>
+                        <h:commandLink value="Remove Requirement"
+                            action="#{testCaseController.removeRequirement(r.id)}" />
+                    </h:column>
+                </h:dataTable>
+                <br />
+                <h:outputLabel for="requirement">Available Requirements:</h:outputLabel>
+                <h:selectOneMenu id="requirement" value="#{testCaseController.selected}">
+                    <f:selectItems value="#{testCaseController.availableRequirements}" var="n" itemValue="#{n.id}"
+                        itemLabel="#{n.code}" />
+                </h:selectOneMenu>
+                <h:commandButton id="add" value="Add Requirement" action="#{testCaseController.addRequirement()}" />
+            </h:form>
         </div>
         <div>
-            <h2>Containing Test Runs</h2>
-            <h:dataTable value="#{testCaseController.testRuns}" var="r" styleClass="data-table"
-                headerClass="data-header" rowClasses="data-odd,data-even">
-                <h:column>
-                    <f:facet name="header">Code</f:facet>
-                    <h:link value="#{r.code}" outcome="req.xhtml">
-                        <f:param name="id" value="#{r.id}" />
-                    </h:link>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Assignee</f:facet>
-                    #{r.assignee}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Coverage</f:facet>
-                    #{r.coverage}
-                </h:column>
-            </h:dataTable>
+            <h:form prependId="false">
+                <h2>Containing Test Runs</h2>
+                <h:dataTable value="#{testCaseController.testRuns}" var="r" styleClass="data-table"
+                    headerClass="data-header" rowClasses="data-odd,data-even">
+                    <h:column>
+                        <f:facet name="header">Code</f:facet>
+                        <h:link value="#{r.code}" outcome="req.xhtml">
+                            <f:param name="id" value="#{r.id}" />
+                        </h:link>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Assignee</f:facet>
+                        #{r.assignee}
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">Coverage</f:facet>
+                        #{r.coverage}
+                    </h:column>
+                    <h:column>
+                        <h:commandLink value="Remove from Test Run"
+                            action="#{testCaseController.removeTestRun(r.id)}" />
+                    </h:column>
+                </h:dataTable>
+                <br />
+                <h:outputLabel for="run">Available Test Runs:</h:outputLabel>
+                <h:selectOneMenu id="run" value="#{testCaseController.selectedRun}">
+                    <f:selectItems value="#{testCaseController.availableTestRuns}" var="n" itemValue="#{n.id}"
+                        itemLabel="#{n.code}" />
+                </h:selectOneMenu>
+                <h:commandButton id="assign" value="Add to Test Run" action="#{testCaseController.addTestRun()}" />
+            </h:form>
         </div>
     </h:body>
 </f:view>

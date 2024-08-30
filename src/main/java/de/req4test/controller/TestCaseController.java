@@ -1,7 +1,9 @@
 package de.req4test.controller;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import de.req4test.Repository;
@@ -30,6 +32,8 @@ public class TestCaseController implements Serializable {
     private DataModel<String> steps;
     private String newStep;
     private boolean stepsUpdated;
+    private int selected;
+    private int selectedRun;
     private Repository repository;
 
     @Inject
@@ -80,8 +84,31 @@ public class TestCaseController implements Serializable {
         return requirements;
     }
 
+    public Set<Requirement> getAvailableRequirements() {
+        List<Requirement> reqs = repository.getRequirements();
+        if (requirements != null) {
+            Set<Requirement> result = reqs.stream()
+                    .filter(x -> !requirements.stream().anyMatch(y -> x.getId() == y.getId()))
+                    .collect(Collectors.toSet());
+            return result;
+        } else {
+            return new HashSet<>(reqs);
+        }
+    }
+
     public List<TestRun> getTestRuns() {
         return runs;
+    }
+
+    public Set<TestRun> getAvailableTestRuns() {
+        List<TestRun> rs = repository.getTestRuns();
+        if (requirements != null) {
+            Set<TestRun> result = rs.stream().filter(x -> !requirements.stream().anyMatch(y -> x.getId() == y.getId()))
+                    .collect(Collectors.toSet());
+            return result;
+        } else {
+            return new HashSet<>(rs);
+        }
     }
 
     public DataModel<String> getSteps() {
@@ -107,6 +134,45 @@ public class TestCaseController implements Serializable {
         stepData.add(newStep);
         newStep = null;
         steps = new ArrayDataModel<String>(stepData.toArray(new String[0]));
+    }
+
+    public int getSelected() {
+        return selected;
+    }
+
+    public void setSelected(int value) {
+        selected = value;
+    }
+
+    public int getSelectedRun() {
+        return selectedRun;
+    }
+
+    public void setSelectedRun(int value) {
+        selectedRun = value;
+    }
+
+    public void addRequirement() {
+        TestCase test = repository.getTestCase(id);
+        Requirement req = repository.getRequirement(selected);
+        test.addRequirement(req);
+        repository.updateTestCase(test);
+        setId(id);
+    }
+
+    public void addTestRun() {
+        TestCase test = repository.getTestCase(id);
+        TestRun testRun = repository.getTestRun(selectedRun);
+        test.addTestRun(testRun);
+        repository.updateTestCase(test);
+        setId(id);
+    }
+
+    public void removeRequirement(int value) {
+        TestCase test = repository.getTestCase(id);
+        test.removeRequirement(value);
+        repository.updateTestCase(test);
+        setId(id);
     }
 
     public void update() {

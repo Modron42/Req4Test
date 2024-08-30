@@ -1,7 +1,9 @@
 package de.req4test.controller;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import de.req4test.Repository;
@@ -22,6 +24,7 @@ public class RequirementController implements Serializable {
     private String code;
     private String text;
     private List<TestCase> testCases;
+    private int selected;
     private Repository repository;
 
     @Inject
@@ -66,6 +69,40 @@ public class RequirementController implements Serializable {
         return testCases;
     }
 
+    public Set<TestCase> getAvailableTestCases() {
+        List<TestCase> tests = repository.getTestCases();
+        if (testCases != null) {
+            Set<TestCase> result = tests.stream().filter(x -> !testCases.stream().anyMatch(y -> x.getId() == y.getId()))
+                    .collect(Collectors.toSet());
+            return result;
+        } else {
+            return new HashSet<>(tests);
+        }
+    }
+
+    public int getSelected() {
+        return selected;
+    }
+
+    public void setSelected(int value) {
+        selected = value;
+    }
+
+    public void addTestCase() {
+        Requirement req = repository.getRequirement(id);
+        TestCase test = repository.getTestCase(selected);
+        req.addTestCase(test);
+        repository.updateRequirement(req);
+        setId(id);
+    }
+
+    public void removeTestCase(int value) {
+        Requirement req = repository.getRequirement(id);
+        req.removeTestCase(value);
+        repository.updateRequirement(req);
+        setId(id);
+    }
+    
     public void update() {
         Requirement req = repository.getRequirement(id);
         req.getTitle(title);
