@@ -9,6 +9,15 @@
         <f:viewParam name="id" value="#{requirementController.id}" />
     </f:metadata>
     <h:body>
+        <div>
+            <h:form rendered="#{loginController.loggedIn}">
+                <h3>Logged in as:
+                    <h:outputText value="#{loginController.fullName}" />
+                    <h:commandButton value="Logout" action="#{loginController.logout()}"></h:commandButton>
+                </h3>
+            </h:form>
+        </div>
+        <hr />
         <h1>View Requirement: #{requirementController.code}</h1>
         <h:link value="Dashboard" outcome="index.xhtml" />
         <br />

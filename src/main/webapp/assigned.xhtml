@@ -4,6 +4,7 @@
 <f:view>
     <h:head>
         <title>Require4Testing</title>
+        <h:outputStylesheet library="css" name="styles.css" />
     </h:head>
     <h:body>
         <div>
@@ -15,27 +16,16 @@
             </h:form>
         </div>
         <hr />
-        <h1>Test Runs</h1>
+        <h1>Test Runs Assigned to me (#{loginController.fullName})</h1>
         <h:link value="Dashboard" outcome="index.xhtml" />
-        <div>
-            <h:form prependId="false">
-                <p>
-                    <h:commandButton id="submit" value="New Test Run" action="#{testRunController.create()}" />
-                </p>
-            </h:form>
-        </div>
         <br />
-        <h:dataTable value="#{repository.testRuns}" var="r" styleClass="data-table" headerClass="data-header"
+        <h:dataTable value="#{testRunController.assignedRuns(loginController.id)}" var="r" headerClass="data-header"
             rowClasses="data-odd,data-even">
             <h:column>
                 <f:facet name="header">Code</f:facet>
                 <h:link value="#{r.code}" outcome="run.xhtml">
                     <f:param name="id" value="#{r.id}" />
                 </h:link>
-            </h:column>
-            <h:column>
-                <f:facet name="header">Assignee</f:facet>
-                #{r.assignee}
             </h:column>
             <h:column>
                 <f:facet name="header">Coverage</f:facet>
