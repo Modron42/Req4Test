@@ -17,7 +17,7 @@
         </div>
         <hr />
         <h1>Test Runs Assigned to me (#{loginController.fullName})</h1>
-        <h:link value="Dashboard" outcome="index.xhtml" />
+        <h:link class="badge" value="Dashboard" outcome="index.xhtml" />
         <br />
         <h:dataTable value="#{testRunController.assignedRuns(loginController.id)}" var="r" headerClass="data-header"
             rowClasses="data-odd,data-even">

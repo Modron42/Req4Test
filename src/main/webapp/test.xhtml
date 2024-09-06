@@ -4,6 +4,7 @@
 <f:view>
     <h:head>
         <title>Require4Testing</title>
+        <h:outputStylesheet library="css" name="styles.css" />
     </h:head>
     <f:metadata>
         <f:viewParam name="id" value="#{testCaseController.id}" />
@@ -19,9 +20,8 @@
         </div>
         <hr />
         <h1>View Test Case: #{testCaseController.code}</h1>
-        <h:link value="Dashboard" outcome="index.xhtml" />
-        <br />
-        <h:link value="Test Cases" outcome="tests.xhtml" />
+        <h:link class="badge" value="Dashboard" outcome="index.xhtml" />
+        <h:link class="badge" value="Test Cases" outcome="tests.xhtml" />
         <br />
         <div>
             <h:form prependId="false">

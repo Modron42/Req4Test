@@ -1,0 +1,108 @@
+h1 {
+    color: #A80000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+  }
+  
+  h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+  }
+  
+  h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: lighter;
+  }
+  
+  .badge {
+    display: inline-block;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    padding: 0.8em;
+    background-color: #405061;
+    line-height: 1em;
+    margin: 0.8em;
+    border-radius: 4px;
+  }
+  
+  .badge:hover {
+    color: #2c3a41;
+    background-color: #e6e6e6;
+  }
+  
+  .badge:active {
+    color: #fafafa;
+    background-color: #525252;
+  }
+  
+  label {
+    color: #435960;
+    font-weight: bold;
+  }
+  
+  input {
+    display: inline-block;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    box-sizing: border-box;
+  }
+  
+  select {
+    display: inline-block;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    box-sizing: border-box;
+  }
+  
+  button {
+    margin-top: 20px;
+    margin: 0.5rem;
+    background-color: #eee;
+    padding: 1rem;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  button:hover {
+    background-color: #cfd8dc;
+  }
+  
+  form {
+    display: table;
+  }
+  
+  form p {
+    display: table-row;
+  }
+  
+  form p label {
+    display: table-cell;
+  }
+  
+  form p input {
+    display: table-cell;
+  }
+  
+  form p button {
+    display: table-cell;
+  }
+  
+  table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+  }
+  
+  th.data-header td {
+    padding: 1rem;
+    background-color: white;
+  }
+  
+  tr.data-odd td {
+    padding: 1rem;
+    background-color: #eee;
+  }
+  
+  tr.data-even td {
+    padding: 1rem;
+    background-color: white;
+  }

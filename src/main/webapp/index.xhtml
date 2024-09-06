@@ -4,6 +4,7 @@
 <f:view>
     <h:head>
         <title>Require4Testing</title>
+        <h:outputStylesheet library="css" name="styles.css" />
     </h:head>
     <h:body>
         <div>
@@ -27,15 +28,11 @@
         </div>
         <hr />
         <h1>Welcome to Require4Testing</h1>
-        <h:link value="Users" outcome="users.xhtml" />
-        <br />
-        <h:link value="Requirements" outcome="reqs.xhtml" />
-        <br />
-        <h:link value="Test Cases" outcome="tests.xhtml" />
-        <br />
-        <h:link value="Test Runs" outcome="runs.xhtml" />
-        <br />
-        <h:link value="Assigned to me" outcome="assigned.xhtml" />
+        <h:link class="badge" value="Users" outcome="users.xhtml" />
+        <h:link class="badge" value="Requirements" outcome="reqs.xhtml" />
+        <h:link class="badge" value="Test Cases" outcome="tests.xhtml" />
+        <h:link class="badge" value="Test Runs" outcome="runs.xhtml" />
+        <h:link class="badge" value="Assigned to me" outcome="assigned.xhtml" />
     </h:body>
 </f:view>
 
