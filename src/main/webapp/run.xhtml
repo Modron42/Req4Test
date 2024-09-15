@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="jakarta.faces.core" xmlns:jsf="jakarta.faces"
-    xmlns:h="jakarta.faces.html">
+    xmlns:h="jakarta.faces.html" xmlns:tp="jakarta.faces.composite/composite">
 <f:view>
     <h:head>
         <title>Require4Testing</title>
@@ -10,14 +10,7 @@
         <f:viewParam name="id" value="#{testRunController.id}" />
     </f:metadata>
     <h:body>
-        <div>
-            <h:form rendered="#{loginController.loggedIn}">
-                <h3>Logged in as:
-                    <h:outputText value="#{loginController.fullName}" />
-                    <h:commandButton value="Logout" action="#{loginController.logout()}"></h:commandButton>
-                </h3>
-            </h:form>
-        </div>
+        <tp:login />
         <hr />
         <h1>View Test Run: #{testRunController.code}</h1>
         <h:link class="badge" value="Dashboard" outcome="index.xhtml" />

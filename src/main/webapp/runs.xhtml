@@ -1,20 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="jakarta.faces.core" xmlns:ui="jakarta.faces.facelets"
-    xmlns:jsf="jakarta.faces" xmlns:h="jakarta.faces.html">
+    xmlns:jsf="jakarta.faces" xmlns:h="jakarta.faces.html" xmlns:tp="jakarta.faces.composite/composite">
 <f:view>
     <h:head>
         <title>Require4Testing</title>
         <h:outputStylesheet library="css" name="styles.css" />
     </h:head>
     <h:body>
-        <div>
-            <h:form rendered="#{loginController.loggedIn}">
-                <h3>Logged in as:
-                    <h:outputText value="#{loginController.fullName}" />
-                    <h:commandButton value="Logout" action="#{loginController.logout()}"></h:commandButton>
-                </h3>
-            </h:form>
-        </div>
+        <tp:login />
         <hr />
         <h1>Test Runs</h1>
         <h:link class="badge" value="Dashboard" outcome="index.xhtml" />

@@ -1,0 +1,33 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="jakarta.faces.html" xmlns:f="jakarta.faces.core"
+    xmlns:cc="jakarta.faces.composite">
+
+<h:body>
+    <cc:interface>
+    </cc:interface>
+
+    <cc:implementation>
+        <h:form rendered="#{not loginController.loggedIn}">
+            <p>
+                <h:outputLabel for="login_username">Username:</h:outputLabel>
+                <h:inputText id="login_username" value="#{loginController.username}"></h:inputText>
+                <h:message for="login_username"></h:message>
+                <h:outputLabel for="login_password">Password:</h:outputLabel>
+                <h:inputSecret id="login_password" value="#{loginController.password}"></h:inputSecret>
+                <h:message for="login_password"></h:message>
+                <h:commandButton value="Login" action="#{loginController.login()}"></h:commandButton>
+            </p>
+        </h:form>
+        <h:form rendered="#{loginController.loggedIn}">
+            <h3>Logged in as:
+                <h:outputText value="#{loginController.fullName}" />
+                <h:commandButton value="Logout" action="#{loginController.logout()}"></h:commandButton>
+            </h3>
+        </h:form>
+    </cc:implementation>
+</h:body>
+
+</html>

@@ -1,31 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:f="jakarta.faces.core" xmlns:jsf="jakarta.faces"
-    xmlns:h="jakarta.faces.html">
+    xmlns:h="jakarta.faces.html" xmlns:tp="jakarta.faces.composite/composite">
 <f:view>
     <h:head>
         <title>Require4Testing</title>
         <h:outputStylesheet library="css" name="styles.css" />
     </h:head>
     <h:body>
-        <div>
-            <h:form rendered="#{not loginController.loggedIn}">
-                <p>
-                    <h:outputLabel for="username">Username:</h:outputLabel>
-                    <h:inputText id="username" value="#{loginController.username}"></h:inputText>
-                    <h:message for="username"></h:message>
-                    <h:outputLabel for="password">Password:</h:outputLabel>
-                    <h:inputSecret id="password" value="#{loginController.password}"></h:inputSecret>
-                    <h:message for="password"></h:message>
-                    <h:commandButton value="Login" action="#{loginController.login()}"></h:commandButton>
-                </p>
-            </h:form>
-            <h:form rendered="#{loginController.loggedIn}">
-                <h3>Logged in as:
-                    <h:outputText value="#{loginController.fullName}" />
-                    <h:commandButton value="Logout" action="#{loginController.logout()}"></h:commandButton>
-                </h3>
-            </h:form>
-        </div>
+        <tp:login />
         <hr />
         <h1>Welcome to Require4Testing</h1>
         <h:link class="badge" value="Users" outcome="users.xhtml" />
